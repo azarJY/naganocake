@@ -25,12 +25,14 @@ class Public::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
   
-  #private
+  private
 
-  #def customer_state
-  #  customer = Customer.find_by(email: params[:customer][:email])
-  #  return if customer.nil?
-  #  return unless customer.valid_password?(params[:customer][:password])
-    
-  #end
+  def customer_state
+    customer = Customer.find_by(email: params[:customer][:email])
+    return if customer.nil?
+    return unless customer.valid_password?(params[:customer][:password])
+    if customer.is_active
+    else redirect_to new_customer_registration_path
+    end
+  end
 end

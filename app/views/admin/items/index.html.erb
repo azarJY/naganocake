@@ -1,1 +1,22 @@
-<P>Admin商品</P>
+<h1>商品一覧</h1>
+<thead>
+  <tr>
+    <th>商品ID</th>
+    <th>商品名</th>
+    <th>税抜価格</th>
+  </tr>
+</thead>
+<tbody>
+  <% @items.each do |item| %>
+    <tr>
+      <td><%= item.id %></td>
+      <td>
+        <%= link_to admin_item_path(item.id) do %>
+          <%= item.name %>
+        <% end %>
+      </td>
+      <td><%= item.price %></td>
+    </tr>
+  <% end %>
+</tbody>
+<tfooter><%= paginate items %></tfooter>

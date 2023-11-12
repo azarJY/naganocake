@@ -1,1 +1,9 @@
-<P>Admin商品</P>
+<P>商品詳細</P>
+
+<div>
+  <%= image_tag @item.get_image %>
+  <p>商品名 : <%= @item.name %></p>
+  <p>商品説明 : <%= @item.introduction %></p>
+  <p>税込価格(税抜価格) : <%= @item.price %></p>
+</div>
+<%= link_to '編集する', edit_admin_item_path(@item.id), class="btn btn-success" %>
