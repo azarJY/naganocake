@@ -1,1 +1,6 @@
-<P>Customer商品詳細ページ</P>
+<%= image_tag @item.get_image %>
+<h2><%= @item.name %></h2>
+<h3><%= @item.introduction %></h3>
+<h2><%= @tax_included_price %>(税込)</h2>
+
+<%= link_to "カートに入れる", public_cart_items_path, class: 'btn btn-success' %>

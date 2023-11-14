@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   sessions: "admin/sessions"
 }
 
+  root to: "public/homes#top"
+
   namespace :admin do
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
     get 'orders/show'
@@ -19,7 +21,7 @@ Rails.application.routes.draw do
   namespace :public do
     root to: "homes#top"
     get 'homes/about', as: 'about'
-    resources :items, only: [:top, :index]
+    resources :items, only: [:top, :index, :show]
     
     resources :current_customers, only: [:show, :edit, :update]
     patch 'current_customers/unsubscribed'

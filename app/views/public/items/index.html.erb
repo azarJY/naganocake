@@ -1,1 +1,12 @@
-<p>Costomer商品一覧</p>
+<h1>商品一覧</h1>
+<h3>全<%= @item_count %>件</h3>
+
+<% @items.each do |item| %>
+  <%= link_to public_item_path(item.id) do %>
+    <%= image_tag item.get_image %>
+    <%= item.name %>
+    <p>￥<%= item.price %></p>
+  <% end %>
+<% end %>
+
+<%= paginate @items, per: 8 %>
