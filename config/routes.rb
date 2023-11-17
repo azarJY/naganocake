@@ -23,9 +23,12 @@ Rails.application.routes.draw do
     get 'homes/about', as: 'about'
     resources :items, only: [:top, :index, :show]
     
-    resources :current_customers, only: [:show, :edit, :update]
-    patch 'current_customers/unsubscribed'
-    get 'current_customers/confirm'
+    resource :current_customer, only: [:show, :edit, :update] do
+      member do
+        get 'confirm', to: 'current_customers#confirm'
+        patch 'unsubscribed', to: 'current_customers#unsubscribed'
+      end
+    end
     
     resources :cart_items, only: [:index, :update, :destroy, :create]
     delete 'cart_items/destroy_all'
@@ -34,7 +37,7 @@ Rails.application.routes.draw do
     post 'orders/confirm'
     get 'orders/completed'
     
-    resources :addreses, only: [:index, :edit, :create, :update, :destroy]
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

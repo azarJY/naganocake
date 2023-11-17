@@ -1,5 +1,5 @@
 <h1>会員情報編集</h1>
-<%= form_with model: @customer do |f| %>
+<%= form_with model: @customer, url: public_current_customer_path, method: :patch do |f| %>
   <p>氏名</p>
     <%= f.text_field :last_name %>
     <%= f.text_field :first_name %>
@@ -16,5 +16,5 @@
     <%= f.text_field :email %>
     
     <%= f.submit "編集内容を保存", class:"btn btn-success" %>
-    <%= link_to "退会する", public_current_customers_confirm_path, class:"btn btn-danger" %>
+    <%= link_to "退会する", confirm_public_current_customer_path, class:'btn btn-danger'%>
 <% end %>
