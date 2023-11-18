@@ -13,14 +13,6 @@ class Public::ItemsController < ApplicationController
     @tax_included_price = calculate_tax_included_price(@item.price)
   end
   
-  def new
-    
-  end
-  
-  def edit
-    
-  end
-  
   private
   
 

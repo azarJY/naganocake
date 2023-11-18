@@ -6,10 +6,12 @@ class Public::AddressesController < ApplicationController
 
   def create
     @address = Address.new(address_params)
+    @address.customer_id = current_customer.id
   if @address.save
-    flash[:success] = "新しいアドレスが登録されました"
+    flash[:notice] = "新しいアドレスが登録されました"
     redirect_to public_addresses_path
   else
+    flash[:notice] = "登録に失敗しました"
     @addresses = Address.all
     render :index
   end

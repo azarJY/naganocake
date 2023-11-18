@@ -1,6 +1,8 @@
-<%= image_tag @item.get_image %>
+<%= image_tag @item.get_image, width: 100, height: 200 %>
 <h2><%= @item.name %></h2>
 <h3><%= @item.introduction %></h3>
 <h2><%= @tax_included_price %>(税込)</h2>
+<%= f.hidden_field :item_id, value: @item.id %>
+<%= f.select :amount, (1..10).to_a %>
 
 <%= link_to "カートに入れる", public_cart_items_path, class: 'btn btn-success' %>
