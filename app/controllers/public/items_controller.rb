@@ -11,6 +11,7 @@ class Public::ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @tax_included_price = calculate_tax_included_price(@item.price)
+    @cart_item = CartItem.new
   end
   
   private
