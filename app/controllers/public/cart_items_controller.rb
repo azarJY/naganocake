@@ -1,31 +1,20 @@
 class Public::CartItemsController < ApplicationController
   
   def create
-    item = Item.find(params[:item_id])
-    @cart_item = CartItem.find_by(item_id: item.id, customer_id: current_customer.id)
-  
-    if @cart_item.present?
-      @cart_item.amount += params[:amount].to_i
-      if @cart_item.save
-        flash[:notice] = "商品がカートに追加されました"
-        redirect_to public_cart_items_path
-      else
-        flash[:notice] = "カートへの追加に失敗しました"
-        @cart_items = CartItem.all
-        render :index
-      end
+    @cart_item = current_customer.cart_items.new(cart_item_params)
+    if current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id]).present?
+      cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
+      cart_item.amount += params[:cart_item][:amount].to_i
+      cart_item.save
+      redirect_to public_cart_items_path
+    elsif @cart_item.save
+      @cart_items = current_customer.cart_items.all
+      redirect_to public_cart_items_path
     else
-      @cart_item = CartItem.new(item_id: item.id, customer_id: current_customer.id, amount: params[:amount])
-      if @cart_item.save
-        flash[:notice] = "商品がカートに追加されました"
-        redirect_to public_cart_items_path
-      else
-        flash[:notice] = "カートへの追加に失敗しました"
-        @cart_items = CartItem.all
-        render :index
-      end
+      render 'index'
     end
   end
+  
   
   def index
     @cart_items = CartItem.all
