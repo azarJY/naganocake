@@ -7,24 +7,25 @@ class Public::OrdersController < ApplicationController
 
   def new
     @customer = current_customer
+    @order = Order.new
   end
 
   def confirm
-    if params[:order][:address_id] == "0"
-    address = current_customer.address_display
+    if params[:order][:address_select_id] == "0"
+    @new_order = Order.new(order_params)
+    new_order.postal_code = current_customer.postal_code
+    new_order.address = current_customer.address
+    new_order.name = current_customer.last_name + current_customer.first_name
 
-    elsif params[:order][:address_id] == "1"
-    address_id = params[:order][:address_id]
-
-    elsif params[:order][:address_id] == "2"
-    order_params = params.require(:order).permit(:postal_code, :address, :name)
-    postal_code = order_params[:postal_code]
-    address = order_params[:address]
-    name = order_params[:name]
-
-    new_order = Order.new(order_params)
-    new_order.save
-
+    elsif params[:order][:address_select_id] == "1"
+    @new_order = Order.new(order_params)
+    new_order.postal_code = Address.find(params[:order][:address_id]).postal_code
+    new_order.address = Address.find(params[:order][:address_id]).address
+    new_order.name = Address.find(params[:order][:address_id]).name
+    
+    elsif params[:order][:address_select_id] == "2"
+    @new_order = Order.new(order_params)
+    
     else
       render :new
     end
@@ -40,7 +41,7 @@ class Public::OrdersController < ApplicationController
   private
   
   def order_params
-    params.require(:order).permit(:postal_code, :address, :name)
+    params.require(:order).permit(:postal_code, :address, :name, :payment_method)
   end
   
 end

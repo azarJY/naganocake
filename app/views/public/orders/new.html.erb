@@ -7,15 +7,15 @@
   <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
   <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer]%>
 <h2>お届け先</h2>
-  <%= f.radio_button :address_id, "0" %>
+  <%= f.radio_button :address_select_id, "0" %>
   <%= f.label :address_id, "ご自身の住所" %>
   <%= @customer.address_display %></br>
   
-  <%= f.radio_button :address_id, "1" %>
+  <%= f.radio_button :address_select_id, "1" %>
   <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %>
   <%= f.label :address_id, "登録済住所" %></br>
   
-  <%= f.radio_button :address_id, "2" %>
+  <%= f.radio_button :address_select_id, "2" %>
     <%= f.label :postal_code , "郵便番号(ハイフンなし)" %>
     <%= f.text_field :postal_code %></br>
     <%= f.label :address , "住所" %>
