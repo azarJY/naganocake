@@ -4,7 +4,7 @@
 <h2><%= @tax_included_price %>(税込)</h2>
 
 <%= form_with model: @cart_item, url:public_cart_items_path do |f| %>
-<%= f.hidden_field :item_id, value: @item.id %>
-<%= f.select :amount, (1..10).to_a %>
-<%= f.submit "カートに入れる", class: "btn btn-primary" %>
+  <%= f.hidden_field :item_id, value: @item.id %>
+  <%= f.select :amount, (1..10).to_a %>
+  <%= f.submit "カートに入れる", class: "btn btn-primary" %>
 <% end %>
