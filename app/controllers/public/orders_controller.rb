@@ -1,8 +1,13 @@
 class Public::OrdersController < ApplicationController
   def index
+    @orders = current_customer.order.all
+    @order_details = OrderDetail.all
   end
 
   def show
+    @order = current_customer.order.find(params[:id])
+    @order_details = OrderDetail.all
+    @total_price = 0
   end
 
   def new

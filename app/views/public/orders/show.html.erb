@@ -1,6 +1,24 @@
 <h1>注文履歴詳細</h1>
 <h2>注文情報</h2>
+<table>
+  <tr><th>注文日</th><td><%= @order.created_at %></td></tr>
+  <tr>
+    <th>配送先</th>
+    <td>
+      <%= @order.postal_code %></br>
+      <%= @order.address %></br>
+      <%= @order.name %>
+    </td>
+  </tr>
+  <tr><th>支払方法</th><td><%= @order.payment_method_i18n %></td></tr>
+</table>
+
 <h2>請求情報</h2>
+<table>
+  <tr><th>商品合計</th><td><%= @total_price %></td></tr>
+  <tr><th>配送料</th><td><%= @order.postage %></td></tr>
+  <tr><th>ご請求額</th><td><%= @order.total_payment %></td></tr>
+</table>
 
 <h2>注文内容</h2>
 <table>
@@ -20,6 +38,7 @@
         <td><%= order_detail.amount %></td>
         <td><%= order_detail.subtotalt %></td>
       </tr>
+      <% @total_price += order_detail.subtotal %>
       <% end %>
     </tbody>
 </table>
