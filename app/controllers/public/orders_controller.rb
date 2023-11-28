@@ -1,13 +1,12 @@
 class Public::OrdersController < ApplicationController
   def index
-    @orders = current_customer.order.all
-    @order_details = OrderDetail.all
+    @orders = current_customer.orders.all
   end
 
   def show
-    @order = current_customer.order.find(params[:id])
-    @order_details = OrderDetail.all
     @total_price = 0
+    @order = current_customer.orders.find(params[:id])
+    @order_details = @order.order_details
   end
 
   def new
@@ -18,7 +17,7 @@ class Public::OrdersController < ApplicationController
   def confirm
     @order_detail = Order.new(order_params)
     @cart_items = current_customer.cart_items.all
-    @total_price = 0
+    @total_price = current_customer.cart_items.sum { |cart_item| cart_item.item.price * cart_item.amount }
     if params[:order][:address_select_id] == "0"
     @order = Order.new(order_params)
     @order.postal_code = current_customer.postal_code
@@ -43,7 +42,6 @@ class Public::OrdersController < ApplicationController
     
     @order = current_customer.orders.new(order_params)
     @total_price = 0
-    @order.total_payment = @total_price + @order.postage
     @order.save
     
     current_customer.cart_items.each do |cart_item|

@@ -1,5 +1,6 @@
 <h1>商品一覧</h1>
 <%= link_to("＋", new_admin_item_path) %>
+<table>
 <thead>
   <tr>
     <th>商品ID</th>
@@ -21,3 +22,4 @@
   <% end %>
 </tbody>
 <tfooter><%= paginate @items, per: 10 %></tfooter>
+</table>

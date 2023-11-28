@@ -5,20 +5,8 @@ class ApplicationController < ActionController::Base
     if  resource.is_a?(Admin)
       admin_homes_top_path
     else
-      public_items_path
+      public_root_path
     end
-  end
-  
-  def after_sign_out_path_for(resource)
-    if  resource.is_a?(Admin)
-      new_admin_session_path
-    else
-      new_customer_session_path
-    end
-  end
-  
-  def after_sign_up_path_for(resource)
-    public_current_customer_path
   end
 
   protected

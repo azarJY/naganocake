@@ -12,7 +12,9 @@
 
   <body>
     <header>
-      <h1>LOGO</h1>
+      <h1>
+        <%= link_to "ながのCAKE", public_root_path %>
+      </h1>
         <% if admin_signed_in? %>
           <li>
             <%= link_to "商品一覧", admin_items_path %>
@@ -21,7 +23,7 @@
             <%= link_to "会員一覧", admin_customers_path %>
           </li>
           <li>
-            <%= link_to "注文履歴一覧", admin_orders_show_path %>
+            <%= link_to "注文履歴一覧", admin_homes_top_path %>
           </li>
           <li>
             <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>

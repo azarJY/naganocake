@@ -1,10 +1,10 @@
 <%= image_tag @item.get_image, width: 200, height: 100 %>
 <h2><%= @item.name %></h2>
 <h3><%= @item.introduction %></h3>
-<h2><%= @tax_included_price %>(税込)</h2>
+<h2>￥<%= @tax_included_price %></h2><h3>(税込)</h3>
 
 <%= form_with model: @cart_item, url:public_cart_items_path do |f| %>
   <%= f.hidden_field :item_id, value: @item.id %>
-  <%= f.select :amount, (1..10).to_a %>
+  <%= f.select :amount, (1..10).to_a, prompt: "個数選択" %>
   <%= f.submit "カートに入れる", class: "btn btn-primary" %>
 <% end %>

@@ -20,6 +20,7 @@ class Public::CurrentCustomersController < ApplicationController
   def unsubscribed
     @customer = Customer.find(current_customer.id)
     @customer.update(is_active: false)
+    session.destroy
     redirect_to root_path
   end
   
