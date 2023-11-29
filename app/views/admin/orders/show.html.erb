@@ -1,48 +1,63 @@
-<h1>注文履歴詳細</h1>
-<table>
-  <tr>
-    <th>購入者</th>
-    <td>
-      <%= link_to admin_customer_path(@customer.id) do %>
-        <%= @order.customer.last_name %><%= @order.customer.first_name %>
-      <% end %>
-    </td>
-  </tr>
-  <tr><th>注文日</th><td><%= @order.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td></tr>
-  <tr>
-    <th>配送先</th>
-    <td>
-      〒<%= @order.postal_code %>
-      <%= @order.address %></br>
-      <%= @order.name %>
-    </td>
-  </tr>
-  <tr><th>支払方法</th><td><%= @order.payment_method_i18n %></td></tr>
-</table>
-<table>
-  <thead>
-    <tr>
-      <th>商品名</th>
-      <th>単価(税込)</th>
-      <th>数量</th>
-      <th>小計</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @order_details.each do |order_detail| %>
-    <tr>
-      <td><%= order_detail.item.name %></td>
-      <td><%= order_detail.price %></td>
-      <td><%= order_detail.amount %></td>
-      <td><%= order_detail.subtotal %></td>
-    </tr>
-    <% @total_price += order_detail.subtotal %>
-    <% end %>
-  </tbody>
-</table>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>注文履歴詳細</h1>
+      <table class="table">
+        <tr>
+          <th scope="col">購入者</th>
+          <td>
+            <%= link_to(admin_customer_path(@customer.id), class:"text-secondary") do %>
+              <%= @order.customer.last_name %><%= @order.customer.first_name %>
+            <% end %>
+          </td>
+        </tr>
+        <tr><th scope="col">注文日</th><td><%= @order.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td></tr>
+        <tr>
+          <th scope="col">配送先</th>
+          <td>
+            〒<%= @order.postal_code %>
+            <%= @order.address %></br>
+            <%= @order.name %>
+          </td>
+        </tr>
+        <tr><th scope="col">支払方法</th><td><%= @order.payment_method_i18n %></td></tr>
+      </table>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-6">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">商品名</th>
+            <th scope="col">単価(税込)</th>
+            <th scope="col">数量</th>
+            <th scope="col">小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order_details.each do |order_detail| %>
+          <tr>
+            <td><%= order_detail.item.name %></td>
+            <td><%= order_detail.price %></td>
+            <td><%= order_detail.amount %></td>
+            <td><%= order_detail.subtotal %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-3">
+      <table class="table">
+        <tr><th>商品合計</th><td><%= @order.total_payment - @order.postage %></td></tr>
+        <tr><th>配送料</th><td><%= @order.postage %></td></tr>
+        <tr><th>請求金額合計</th><td><%= @order.total_payment %></td></tr>
+      </table>
+    </div>
+  </div>
+</div>
 
-<table>
-  <tr><th>商品合計</th><td><%= @total_price %></td></tr>
-  <tr><th>配送料</th><td><%= @order.postage %></td></tr>
-  <tr><th>請求金額合計</th><td><%= @order.total_payment %></td></tr>
-</table>
+
+
+

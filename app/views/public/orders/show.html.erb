@@ -15,7 +15,7 @@
 
 <h2>請求情報</h2>
 <table>
-  <tr><th>商品合計</th><td><%= @total_price %></td></tr>
+  <tr><th>商品合計</th><td><%= @order.total_payment - @order.postage %></td></tr>
   <tr><th>配送料</th><td><%= @order.postage %></td></tr>
   <tr><th>ご請求額</th><td><%= @order.total_payment %></td></tr>
 </table>
@@ -38,7 +38,6 @@
         <td><%= order_detail.amount %></td>
         <td><%= order_detail.subtotal %></td>
       </tr>
-      <% @total_price += order_detail.subtotal %>
       <% end %>
     </tbody>
 </table>

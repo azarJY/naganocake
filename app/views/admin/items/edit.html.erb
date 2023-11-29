@@ -1,12 +1,33 @@
-<h1>商品編集</h1>
-<%= form_with model: @item, url: admin_item_path(@item), method: :patch do |f| %>
-  <label for="inputImage">商品画像</label>
-  <%= f.file_field :image, accept: "image/*" %>
-  <label for="inputName">商品名</label>
-  <%= f.text_field :name %>
-  <label>商品説明</label>
-  <%= f.text_area :introduction %>
-  <label>税抜価格</label>
-  <%= f.text_field :price %>
-  <%= f.submit '変更を保存', class: "btn btn-success" %>
-<% end %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col">
+      <h1>商品編集</h1>
+      <%= form_with model: @item, url: admin_item_path(@item), method: :patch do |f| %>
+        <table class="table">
+          <tr>
+            <th scope="col">商品画像</th>
+            <td><%= f.file_field :image, accept: "image/*" %></td>
+          </tr>
+          <tr>
+            <th scope="col">商品名</th>
+            <td><%= f.text_field :name, prompt: "商品名" %></td>
+          </tr>
+          <tr>
+            <th scope="col">商品説明</th>
+            <td><%= f.text_area :introduction, prompt: "ここに説明文を入力します" %></td>
+          </tr>
+          <tr>
+              <th scope="col">税抜価格</th>
+          <td><%= f.text_field :price, prompt: "例：3000" %></td>
+          </tr>
+        </table>
+        <%= f.submit '変更を保存', class: "btn btn-success" %>
+      <% end %>
+      
+    </div>
+  </div>
+</div>
+
+
+
+  
