@@ -26,6 +26,7 @@
             <td><%= cart_item.amount %></td>
             <td><%= cart_item.subtotal%></td>
           </tr>
+          <% @total_price += cart_item.subtotal * cart_item.amount %>
           <% end %>
         </tbody>
       </table>
