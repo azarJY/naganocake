@@ -1,20 +1,21 @@
-<h1>会員情報編集</h1>
-<%= form_with model: @customer, url: public_current_customer_path, method: :patch do |f| %>
-  <p>氏名</p>
-    <%= f.text_field :last_name %>
-    <%= f.text_field :first_name %>
-  <p>フリガナ</p>
-    <%= f.text_field :last_name_kana %>
-    <%= f.text_field :first_name_kana %>
-  <p>郵便番号</p>
-    <%= f.text_field :postal_code %>
-  <p>住所</p>
-    <%= f.text_field :address %>
-  <p>電話番号</p>
-    <%= f.text_field :telephone_number %>
-  <p>メールアドレス</p>
-    <%= f.text_field :email %>
-    
-    <%= f.submit "編集内容を保存", class:"btn btn-success" %>
-    <%= link_to "退会する", confirm_public_current_customer_path, class: 'btn btn-danger'%>
+<div class="container pt-5">
+  <h1>会員情報編集</h1>
+  <div class="row pt-3">
+    <%= form_with model: @customer, url: public_current_customer_path, method: :patch do |f| %>
+    <table class="table">
+      <tr><th scope="col">氏名</th>
+        <td><%= f.text_field :last_name %>  <%= f.text_field :first_name %></td>
+      </tr>
+      <tr><th scope="col">フリガナ</th>
+        <td><%= f.text_field :last_name_kana %>  <%= f.text_field :first_name_kana %></td>
+      </tr>
+      <tr><th scope="col">郵便番号</th><td><%= f.text_field :postal_code %></td></tr>
+      <tr><th scope="col">住所</th><td><%= f.text_field :address %></td></tr>
+      <tr><th scope="col">電話番号</th><td><%= f.text_field :telephone_number %></td></tr>
+      <tr><th scope="col">メールアドレス</th><td><%= f.text_field :email %></td></tr>
+    </table>
+<%= f.submit "編集内容を保存", class:"btn btn-success" %>
+<%= link_to "退会する", confirm_public_current_customer_path, class: 'btn btn-danger'%>
 <% end %>
+  </div>
+</div>
